@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.contaniner-tareas {
+    background: #181b34;
+    padding: 30px;
+}
+
+.tareas-tipo-compromiso {
+    color: #d5d8df;
+}
+
+.tareas-tipo-compromiso h2 {
+    color: #037f4c;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+    letter-spacing: -0.1px;
+    margin-bottom: 6px;
+}
+
+table {
+    background: #30324e;
+    border: 1px solid #4b4e69;
+    border-left: 5px solid #037f4c;
+    border-radius: 4px;
+}
+
+th {
+    width: fit-content;
+    padding: 4px;
+    border-bottom: 1px solid #4b4e69;
+    border-right: 1px solid #4b4e69;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+}
+
+td {
+    width: fit-content;
+    padding: 4px;
+    border-right: 1px solid #4b4e69;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+    text-align: center;
+}
+
+th:nth-last-child {
+    border-right: 0;
+}
+
+td:nth-last-child {
+    border-right: 0;
+}
