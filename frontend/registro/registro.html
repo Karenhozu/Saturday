@@ -22,46 +22,50 @@
             <div class="container-fluid container-form">
                 <h1>Registro</b></h1>
                 <div class="form-content">
-                    <form id="form" novalidate>
+                    <form id="form" action="http://localhost:3001/api/users/register" method="POST" novalidate>
                         <div class="input-group">
-                            <div class="mb-3 input-field">
-                                <label for="foto" class="form-label">Foto</label>
-                                <input type="file" class="form-control" id="foto" placeholder="Ingresa tu nombre"
-                                    required>
+                             <div class="mb-3 input-field">
+                                <label for="id_user" class="form-label">Cedula</label>
+                                <input type="number" class="form-control" id="id_user" name="id_user"
+                                    placeholder="Ingresa tu número de cedula" required>
                                 <span class="error"></span>
                             </div>
                             <div class="mb-3 input-field">
                                 <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre"
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tu nombre"
                                     required>
                                 <span class="error"></span>
                             </div>
                             <div class="mb-3 input-field">
-                                <label for="cedula" class="form-label">Cedula</label>
-                                <input type="number" class="form-control" id="cedula"
-                                    placeholder="Ingresa tu número de cedula" required>
+                                <label for="last_name" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="last_name"  name="last_name" placeholder="Ingresa tu apellido"
+                                    required>
                                 <span class="error"></span>
                             </div>
+                           
                             <div class="mb-3 input-field custom-date-wrapper">
-                                <label for="cargo" class="form-label">Cargo</label>
-                                <input type="text" class="form-control" id="cargo" placeholder="Ingresa tu cargo"
-                                    required>
+                                <label for="role_type" class="form-label">Cargo</label>
+                                <select id="role_type" name="role_type" class="form-control">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option value="2">T1</option>
+                                    <option value="3">T2</option>
+                                </select>
                                 <span class="error"></span>
                             </div>
                             <div class="mb-3 input-field custom-date-wrapper">
                                 <label for="email" class="form-label">Correo</label>
-                                <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo"
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo"
                                     required>
                                 <span class="error"></span>
                             </div>
                             <div class="mb-3 input-field custom-date-wrapper">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password"
+                                <input type="password" class="form-control" id="password" name="password"
                                     placeholder="Ingresa tu contraseña" required>
                                 <span class="error"></span>
                             </div>
                             <div class="d-grid gap-2 btn-form">
-                                <button type="submit" class="btn" id="btn-form">Iniciar sesión
+                                <button type="submit" class="btn" id="btn-form">Registro
                                     <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20"
                                         aria-hidden="true"
                                         class="icon_e634ab32bf rightIcon_8370ecdf48 noFocusStyle_b51f6a8a28"

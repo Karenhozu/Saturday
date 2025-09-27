@@ -9,38 +9,157 @@
 </head>
 
 <body>
+    <div>
+        <a href="" class="logout-btn">Cerrar Sesión</a>
+    </div>
     <section class="contaniner-tareas">
-        <div class="tareas-tipo-compromiso">
-            <h2>Compromiso Diario</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Elemento</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Responsable</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Tipologia</th>
-                        <th scope="col">Fecha Inicio</th>
-                        <th scope="col">Fecha Entrega</th>
+  <div class="tareas-tipo-compromiso">
+    <h2>Compromiso Diario</h2>
+    <table id="tablaTareas">
+      <thead>
+        <tr>
+          <th scope="col">Elemento</th>
+          <th scope="col">Id</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Responsable</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Tipología</th>
+          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Fecha Entrega</th>
+        </tr>
+      </thead>
+      <tbody id="bodyTareas">
+        <!-- Aquí van las tareas -->
+      </tbody>
+    </table>
+  </div>
+</section>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>10065879368 - crear url</th>
-                        <td>10065879368</td>
-                        <td>Compromiso</td>
-                        <td>icon</td>
-                        <td>Reemplazar la imagen del hero por la que se comparte adjunto</td>
-                        <td>T1</td>
-                        <td>22-ago</td>
-                        <td>22-ago</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+<script>
+  async function cargarTareas() {
+    try {
+    const ID_ROLE = "2";
+
+      const res = await fetch(`http://localhost:3001/api/tasks?id_rol=${ID_ROLE}`);
+      const tareas = await res.json();
+
+      const tbody = document.getElementById("bodyTareas");
+      tbody.innerHTML = ""; // limpiar la tabla antes de pintar
+
+      /* let tareasCompromiso = [];
+      let tareasImplementacion = {};
+      tareas.filter(()tarea)
+      tareasCompromiso.add(tarea) */
+      tareas.forEach((tarea) => {
+        const row = `
+          <tr>
+            <td>${tarea.task_name}</td>
+            <td>${tarea.id_task}</td>
+            <td>${tarea.status.status_name}</td>
+            <td>${tarea.task_responsible}</td>
+            <td>${tarea.descripcion || "-"}</td>
+            <td>${tarea.role.user_rol}</td>
+            <td>${new Date(tarea.task_start_date).toLocaleDateString()}</td>
+            <td>${new Date(tarea.task_end_date).toLocaleDateString()}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    } catch (error) {
+      console.error("Error al cargar tareas:", error);
+    }
+  }
+
+  // Llamar la función cuando cargue la página
+  document.addEventListener("DOMContentLoaded", cargarTareas);
+</script>
+<!-- 
+<section class="container-form-tarea">
+  <h2>Crear Nueva Tarea</h2>
+  <form id="formTarea">
+    <div>
+      <label for="id_task">id</label>
+      <input type="text" id="id_task" name="id_task" required>
+    </div>
+    <div>
+      <label for="task_name">Nombre de la tarea:</label>
+      <input type="text" id="task_name" name="task_name" required>
+    </div>
+
+    <div>
+      <label for="task_status">Estado:</label>
+      <select id="task_status" name="task_status" required>
+        <option value="">Seleccione un estado</option>
+        <option value="1">Pendiente</option>
+        <option value="2">En Progreso</option>
+        <option value="3">Completado</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="task_responsible">Responsable:</label>
+      <input type="number" id="task_responsible" name="task_responsible" placeholder="ID del usuario" required>
+    </div>
+
+    <div>
+      <label for="task_role">Tipología / Rol:</label>
+      <select id="task_role" name="task_role" required>
+        <option value="">Seleccione un rol</option>
+        <option value="2">T1</option>
+        <option value="3">T2</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="task_start_date">Fecha de inicio:</label>
+      <input type="date" id="task_start_date" name="task_start_date" required>
+    </div>
+
+    <div>
+      <label for="task_end_date">Fecha de entrega:</label>
+      <input type="date" id="task_end_date" name="task_end_date" required>
+    </div>
+
+    <button type="submit">Guardar Tarea</button>
+  </form>
+</section>
+
+<script>
+  document.getElementById("formTarea").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const nuevaTarea = {
+      id_task: document.getElementById("id_task").value,
+      task_name: document.getElementById("task_name").value,
+      task_status: document.getElementById("task_status").value,
+      task_responsible: document.getElementById("task_responsible").value,
+      task_role: document.getElementById("task_role").value,
+      task_start_date: document.getElementById("task_start_date").value,
+      task_end_date: document.getElementById("task_end_date").value,
+    };
+
+    try {
+      const res = await fetch("http://localhost:3001/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(res)
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Tarea creada con éxito");
+        document.getElementById("formTarea").reset();
+      } else {
+        alert("❌ Error: " + data.error);
+      }
+    } catch (err) {
+      console.error("Error en el fetch:", err);
+      alert("❌ Error en la conexión con el servidor");
+    }
+  });
+</script> -->
+
+
 </body>
 
 </html>
