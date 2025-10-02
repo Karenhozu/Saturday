@@ -1,11 +1,40 @@
 const express = require('express');
-const { registerUser, loginUser, logoutUser } = require('../controllers/userController');
+const { registerUser, loginUser, logoutUser, getProfile } = require('../controllers/userController');
+const User = require('../models/usersModel');
 
 const router = express.Router();
 
 router.post('/register', registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
+router.get("/profile", getProfile);
+
+// Obtener todos los usuarios
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: ["id_user", "name", "last_name", "email", "role_type"]
+    });
+    res.json(users);
+  } catch (error) {
+    console.error("❌ Error al obtener usuarios:", error);
+    res.status(500).json({ message: "Error al obtener usuarios", error: error.message });
+  }
+});
+
+// Obtener un usuario por ID
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id, {
+      attributes: ["id_user", "name", "last_name", "email", "role_type"]
+    });
+    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json(user);
+  } catch (error) {
+    console.error("❌ Error al obtener usuario:", error);
+    res.status(500).json({ message: "Error al obtener usuario", error: error.message });
+  }
+});
 
 module.exports = router;
 

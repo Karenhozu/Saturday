@@ -4,7 +4,7 @@ const User = require("./usersModel");
 const Role = require("./roleModel");
 const Status = require("./statusModel");
 
-class Task extends Model {}
+class Task extends Model { }
 
 Task.init(
   {
@@ -22,16 +22,24 @@ Task.init(
       allowNull: false,
     },
     task_responsible: {
-      type: DataTypes.STRING, 
-      allowNull: false,
+      type: DataTypes.INTEGER,   // antes STRING
+      allowNull: true,
+      references: {
+        model: User,
+        key: "id_user"
+      }
+    },
+    task_description: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     task_start_date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     task_end_date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     task_role: {
       type: DataTypes.INTEGER,

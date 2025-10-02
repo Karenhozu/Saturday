@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
 
     res.json({ message: "Login exitoso", user: req.session.user });
   } catch (error) {
-    res.status(500).json({ message: "Error en login", error: error.message, errorDos: error });
+    res.status(500).json({ message: "Error en login", error: error.message });
   }
 };
 
@@ -61,4 +61,15 @@ const logoutUser = (req, res) => {
   });
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+const getProfile = (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: "No estás autenticado" });
+  }
+
+  res.status(200).json({
+    message: "Perfil del usuario",
+    user: req.session.user,
+  });
+};
+
+module.exports = { registerUser, loginUser, logoutUser, getProfile };

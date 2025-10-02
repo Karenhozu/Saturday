@@ -7,6 +7,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="./login.css">
+
+
 </head>
 <header>
     <div class="container-logo">
@@ -17,6 +19,19 @@
 </header>
 
 <body>
+    <script src="../lib/manageUser.js"></script>
+    <script>
+        const validateUser = async () => {
+            const USER = await getProfile(false);
+            if (USER && USER.user) {
+                window.location.href = "/frontend/panelTareas/panel.html";
+            }
+        }
+        validateUser();
+    </script>
+
+
+
     <section class="container container-login">
         <div class="form-text-container">
             <div class="container-fluid container-form">
@@ -58,7 +73,10 @@
     </section>
 
     <script>
+
         const form = document.getElementById("form");
+
+
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -98,7 +116,7 @@
                 if (res.ok) {
                     alert("✅ Sesión iniciada correctamente");
                     // Redirigir al panel
-                    window.location.href = "panel.html";
+                    window.location.href = "/frontend/panelTareas/panel.html";
                 } else {
                     alert(data.message || "Error en las credenciales");
                 }
@@ -106,23 +124,6 @@
                 console.error("Error en login:", error);
                 alert("Error de conexión con el servidor");
             }
-        });
-
-
-        async function logout() {
-            await fetch("http://localhost:3001/api/users/logout", {
-                method: "POST",
-                credentials: "include"
-            });
-            localStorage.removeItem("user");
-            window.location.href = "login.html";
-        }
-
-        const btnLogout = document.querySelector('.logout-btn')
-
-        btnLogout.addEventListener('click', (e) => {
-            e.preventDefault()
-            logout()
         });
 
     </script>
