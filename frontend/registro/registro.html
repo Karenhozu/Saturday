@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="./registro.css">
+</head>
+<header>
+    <div class="container-logo">
+        <figure>
+            <img src="../imgs/saturday-logo.png" alt="">
+        </figure>
+    </div>
+</header>
+
+<body>
+
+    <script src="../lib/manageUser.js"></script>
+    <script>
+        const validateUser = async () => {
+            const USER = await getProfile(false);
+            if (USER && USER.user) {
+                window.location.href = "/frontend/panelTareas/panel.html";
+            }
+        }
+        validateUser();
+    </script>
+
+
+    <section class="container container-login">
+        <div class="form-text-container">
+            <div class="container-fluid container-form">
+                <h1>Registro</b></h1>
+                <div class="form-content">
+                    <form id="form" action="http://localhost:3001/api/users/register" method="POST">
+                        <div class="input-group">
+                            <div class="mb-3 input-field">
+                                <label for="id_user" class="form-label">Cedula</label>
+                                <input type="number" class="form-control" id="id_user" name="id_user"
+                                    placeholder="Ingresa tu número de cedula" required>
+                                <span class="error"></span>
+                            </div>
+                            <div class="mb-3 input-field">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Ingresa tu nombre" required>
+                                <span class="error"></span>
+                            </div>
+                            <div class="mb-3 input-field">
+                                <label for="last_name" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                    placeholder="Ingresa tu apellido" required>
+                                <span class="error"></span>
+                            </div>
+
+                            <div class="mb-3 input-field custom-date-wrapper">
+                                <label for="role_type" class="form-label">Cargo</label>
+                                <select id="role_type" name="role_type" class="form-control">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option value="2">T1</option>
+                                    <option value="3">T2</option>
+                                </select>
+                                <span class="error"></span>
+                            </div>
+                            <div class="mb-3 input-field custom-date-wrapper">
+                                <label for="email" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Ingresa tu correo" required>
+                                <span class="error"></span>
+                            </div>
+                            <div class="mb-3 input-field custom-date-wrapper">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Ingresa tu contraseña" required>
+                                <span class="error"></span>
+                            </div>
+                            <div class="d-grid gap-2 btn-form">
+                                <button type="submit" class="btn" id="btn-form">Registro
+                                    <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20"
+                                        aria-hidden="true"
+                                        class="icon_e634ab32bf rightIcon_8370ecdf48 noFocusStyle_b51f6a8a28"
+                                        data-testid="icon" data-vibe="Icon">
+                                        <path
+                                            d="M2.24999 10.071C2.24999 9.65683 2.58578 9.32104 2.99999 9.32104L15.3315 9.32105L10.7031 4.69273C10.4103 4.39983 10.4103 3.92496 10.7031 3.63207C10.996 3.33917 11.4709 3.33917 11.7638 3.63207L17.6725 9.54071C17.9653 9.83361 17.9653 10.3085 17.6725 10.6014L11.7638 16.51C11.4709 16.8029 10.996 16.8029 10.7031 16.51C10.4103 16.2171 10.4103 15.7423 10.7031 15.4494L15.3315 10.821L2.99999 10.821C2.58578 10.821 2.24999 10.4853 2.24999 10.071Z"
+                                            fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <p>Ya estas registrado?<a href="../login/login.html"> Ingresa aquí</a></p>
+            </div>
+        </div>
+    </section>
+<script src="./registro.js"></script>
+
+</body>
+
+</html>

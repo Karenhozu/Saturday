@@ -4,7 +4,8 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Node artifact files
-node_modules/
+/backend/node_modules/
+/backend/.env
 dist/
 
 # Compiled Java class files
