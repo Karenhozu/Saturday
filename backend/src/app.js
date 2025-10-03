@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(session({
-  secret: "supersecreto", // cámbialo por uno fuerte en producción
+  secret: "supersecreto",
   resave: false,
   saveUninitialized: false,
   cookie: {

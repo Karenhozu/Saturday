@@ -21,7 +21,6 @@ const registerUser  = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error al registrar usuario', error: error.message });
   }
-  console.log("📩 Datos recibidos en el body:", req.body);
 };
 
 
@@ -57,7 +56,7 @@ const logoutUser = (req, res) => {
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ message: "Error al cerrar sesión" });
     res.clearCookie("connect.sid"); // eliminar cookie
-    res.json({ message: "✅ Sesión cerrada" });
+    res.json({ message: "Sesión cerrada" });
   });
 };
 

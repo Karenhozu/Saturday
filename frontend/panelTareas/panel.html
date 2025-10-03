@@ -11,6 +11,8 @@
 <body class="oscuro">
   <script src="../lib/manageUser.js"></script>
 
+<div class="container-main-task">
+
   <div class="container-general">
 
     <div class="container-config">
@@ -75,42 +77,6 @@
       </div>
     </div>
 
-    <script>
-     const modoClaro = document.querySelector('.modo-claro');
-      const modoOscuro = document.querySelector('.modo-oscuro');
-      const temas = document.querySelectorAll('.tema');
-      const configModoClaro = document.querySelector('.btn-modo-claro-oscuro');
-
-      temas.forEach(t => {
-        t.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          configModoClaro.style.display =
-            configModoClaro.style.display === 'block' ? 'none' : 'block';
-        });
-      });
-
-      modoClaro.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.body.classList.remove('oscuro');
-        document.body.classList.add('claro');
-        localStorage.setItem('tema', 'claro');
-      });
-
-      modoOscuro.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.body.classList.remove('claro');
-        document.body.classList.add('oscuro');
-        localStorage.setItem('tema', 'oscuro');
-      });
-
-      const temaGuardado = localStorage.getItem('tema');
-      if (temaGuardado) {
-        document.body.classList.remove('claro', 'oscuro');
-        document.body.classList.add(temaGuardado);
-      }
-
-    </script>
 
     <aside>
       <svg viewBox="0 0 20 20" fill="#fff" width="16" height="16" aria-hidden="true" tabindex="-1"
@@ -139,14 +105,28 @@
       </div>
     </aside>
 
+
+
     <section class="contaniner-tareas">
+      <h1>Legal - T1 Operación Portal 2025</h1>
+      <div class="buscador-container">
+        <span class="icono-buscar">
+          <!-- SVG de lupa blanco -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="#d5d8df">
+            <path
+              d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z" />
+          </svg>
+        </span>
+        <input type="text" id="buscadorTareas" placeholder="Buscar" />
+      </div>
+
       <div class="tareas-tipo-compromiso">
         <h2>Compromiso Diario</h2>
         <table class="compromiso-table" id="tablaTareasCompromiso">
           <thead>
             <tr>
-              <th scope="col">Elemento</th>
               <th scope="col">Id</th>
+              <th scope="col">Elemento</th>
               <th scope="col">Estado</th>
               <th scope="col">Responsable</th>
               <th scope="col">Descripción</th>
@@ -166,8 +146,8 @@
         <table class="implementacion-table" id="tablaTareasImplementacion">
           <thead>
             <tr>
-              <th scope="col">Elemento</th>
               <th scope="col">Id</th>
+              <th scope="col">Elemento</th>
               <th scope="col">Estado</th>
               <th scope="col">Responsable</th>
               <th scope="col">Descripción</th>
@@ -187,8 +167,8 @@
         <table class="produccion-table" id="tablaTareasProduccion">
           <thead>
             <tr>
-              <th scope="col">Elemento</th>
               <th scope="col">Id</th>
+              <th scope="col">Elemento</th>
               <th scope="col">Estado</th>
               <th scope="col">Responsable</th>
               <th scope="col">Descripción</th>
@@ -208,159 +188,7 @@
     </section>
   </div>
 
-  <script>
-    const icon = document.querySelector('.icon-open');
-    const aside = document.querySelector('.container-aside');
-    icon.addEventListener('click', (e) => {
-      e.preventDefault();
-      aside.classList.toggle('active');
-    });
-
-    const iconConfig = document.querySelector('.icon-config');
-    const configContent = document.querySelector('.config-content');
-    iconConfig.addEventListener('click', (e) => {
-      e.preventDefault();
-      configContent.classList.toggle('active');
-    });
-
-    let estados = [];
-    let usuarios = [];
-
-    //  Cargar estados desde backend
-    async function cargarEstados() {
-      try {
-        const res = await fetch("http://localhost:3001/api/status");
-        estados = await res.json();
-      } catch (error) {
-        console.error(" Error cargando estados:", error);
-      }
-    }
-
-    //  Cargar usuarios desde backend
-    async function cargarUsuarios() {
-      try {
-        const res = await fetch("http://localhost:3001/api/users");
-        usuarios = await res.json();
-      } catch (error) {
-        console.error(" Error cargando usuarios:", error);
-      }
-    }
-
-    //  Cargar tareas desde backend
-    async function cargarTareas() {
-      try {
-        const USER = await getProfile();
-        const ID_ROLE = USER.user.role_type;
-
-        const res = await fetch(`http://localhost:3001/api/tasks?id_rol=${ID_ROLE}`);
-        const tareas = await res.json();
-
-        // limpiar tablas
-        document.getElementById("bodyTareasCompromiso").innerHTML = "";
-        document.getElementById("bodyTareasImplementacion").innerHTML = "";
-        document.getElementById("bodyTareasProduccion").innerHTML = "";
-
-        tareas.forEach((tarea) => {
-          // opciones de estados
-          const estadoOptions = estados.map(
-            (estado) => `
-            <option value="${estado.id_status}" 
-              ${parseInt(tarea.task_status) === parseInt(estado.id_status) ? "selected" : ""}>
-              ${estado.status_name}
-            </option>
-          `
-          ).join("");
-
-          // opciones de responsables
-          const responsableOptions = `
-          <option value="">-- Sin asignar --</option>
-          ${usuarios.map(
-            (u) => `
-              <option value="${u.id_user}" 
-                ${tarea.task_responsible == u.id_user ? "selected" : ""}>
-                ${u.name} ${u.last_name}
-              </option>
-            `
-          ).join("")}`;
-
-          const row = document.createElement("tr");
-          row.innerHTML = `
-          <td>${tarea.task_name}</td>
-          <td>${tarea.id_task}</td>
-          <td>
-            <select class="estado-select" data-id="${tarea.id_task}">
-              ${estadoOptions}
-            </select>
-          </td>
-          <td>
-            <select class="responsable-select" data-id="${tarea.id_task}">
-              ${responsableOptions}
-            </select>
-          </td>
-          <td>${tarea.task_description || "-"}</td>
-          <td>${tarea.role?.user_rol || "-"}</td>
-          <td>${tarea.task_start_date ? new Date(tarea.task_start_date).toLocaleDateString() : "-"}</td>
-          <td>${tarea.task_end_date ? new Date(tarea.task_end_date).toLocaleDateString() : "-"}</td>
-        `;
-
-          // ubicar fila en tabla según estado
-          if (parseInt(tarea.task_status) === 1) {
-            document.getElementById("bodyTareasCompromiso").appendChild(row);
-          } else if (parseInt(tarea.task_status) === 2) {
-            document.getElementById("bodyTareasImplementacion").appendChild(row);
-          } else if (parseInt(tarea.task_status) === 3) {
-            document.getElementById("bodyTareasProduccion").appendChild(row);
-          }
-        });
-
-        // eventos de actualización estado
-        document.querySelectorAll(".estado-select").forEach(select => {
-          select.addEventListener("change", async (e) => {
-            const idTarea = e.target.dataset.id;
-            const nuevoEstado = e.target.value;
-            try {
-              await fetch(`http://localhost:3001/api/tasks/${idTarea}/status`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ task_status: nuevoEstado }),
-              });
-              cargarTareas(); // refrescar con fechas nuevas
-            } catch (error) {
-              console.error(" Error al actualizar estado:", error);
-            }
-          });
-        });
-
-        // eventos de actualización responsable
-        document.querySelectorAll(".responsable-select").forEach(select => {
-          select.addEventListener("change", async (e) => {
-            const idTarea = e.target.dataset.id;
-            const nuevoResponsable = e.target.value || null;
-            try {
-              await fetch(`http://localhost:3001/api/tasks/${idTarea}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ task_responsible: nuevoResponsable }),
-              });
-              cargarTareas(); // refrescar con responsable nuevo
-            } catch (error) {
-              console.error(" Error al actualizar responsable:", error);
-            }
-          });
-        });
-
-      } catch (error) {
-        console.error(" Error al cargar tareas:", error);
-      }
-    }
-
-    //  Inicialización
-    document.addEventListener("DOMContentLoaded", async () => {
-      await cargarEstados();
-      await cargarUsuarios();
-      await cargarTareas();
-    });
-  </script>
+  <script src="./panel.js"></script>
 
   <!-- 
 <section class="container-form-tarea">
@@ -448,7 +276,7 @@
   });
 </script> -->
 
-
+</div>
 </body>
 
 </html>

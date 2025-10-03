@@ -2,8 +2,16 @@
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     background-color: #181b34;
+    
+}
+
+.container-main-task{
+    height: 100%;
+    border-left: 15px solid #30324e;
+    border-top: 30px solid #30324e;
 }
 
 .container-general {
@@ -25,9 +33,9 @@ body{
 .config-content {
     background-color: #292f4c;
     position: absolute;
-    top: 20px;
+    top: 52px;
     left: 89%;
-    width: 150px;
+    width: 125px;
     padding: 6px;
     border-radius: 7px;
     display: none;
@@ -62,10 +70,10 @@ body{
 }
 
 
-.btn-modo-claro-oscuro{
+.btn-modo-claro-oscuro {
     background-color: #292f4c;
     position: absolute;
-    top: 64px;
+    top: 81px;
     left: 81%;
     width: 105px;
     padding: 6px;
@@ -98,26 +106,71 @@ body{
     color: #fff;
 }
 
+.buscador-container {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.icono-buscar {
+  position: absolute;
+  left: 10px;
+  pointer-events: none; 
+}
+
+
+#buscadorTareas {
+    width: 80px;
+    padding: 6px 10px 6px 28px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: #d5d8df;
+    background: transparent;
+    background-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#buscadorTareas:focus {
+    width: 230px;
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
 
 
 .contaniner-tareas {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 18px 30px;
     z-index: 999;
     width: 100%;
     height: 100%;
-    gap: 52px;
 }
 
-.tareas-tipo-compromiso {
+.contaniner-tareas h1 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+    letter-spacing: -0.1px;
+    margin-bottom: 10px;
+}
+
+.tareas-tipo-compromiso,
+.tareas-tipo-implementacion,
+.tareas-tipo-produccion {
     color: #d5d8df;
+    margin-bottom: 52px;
 }
 
 .tareas-tipo-compromiso h2 {
     color: #037f4c;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 24px;
     font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
@@ -126,13 +179,11 @@ body{
 }
 
 
-.tareas-tipo-implementacion {
-    color: #d5d8df;
-}
+
 
 .tareas-tipo-implementacion h2 {
     color: #66CCFF;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 24px;
     font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
@@ -140,13 +191,10 @@ body{
     margin-bottom: 6px;
 }
 
-.tareas-tipo-produccion {
-    color: #d5d8df;
-}
 
 .tareas-tipo-produccion h2 {
     color: #784BD1;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 24px;
     font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
@@ -273,32 +321,99 @@ td:nth-last-child {
 }
 
 
+.estado-select, .responsable-select {
+    background: none;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.estado-select:hover  {
+  background-color: #34495e;
+}
+ .responsable-select:hover {
+  background-color: #34495e;
+}
+
+.estado-select option {
+  color: #fff;
+  font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+  background-color: #34495e;
+}
+
+ .responsable-select option {
+  color: #fff;
+  font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+  background-color: #34495e;
+}
+
+
 /* modoClaro */
 
-body.claro{
+body.claro {
     background-color: #fff;
 }
 
-body.claro table{
+body.claro table {
     background-color: #fff;
 }
 
-body.claro th{
+body.claro th {
     border: 1px solid #9699a6;
 }
 
-body.claro td{
+body.claro td {
     border: 1px solid #9699a6;
 }
 
-body.claro .tareas-tipo-compromiso{
+body.claro .tareas-tipo-compromiso {
     color: #323338;
 }
 
-body.claro .tareas-tipo-implementacion{
+body.claro .tareas-tipo-implementacion {
     color: #323338;
 }
 
-body.claro .tareas-tipo-produccion{
+body.claro .tareas-tipo-produccion {
     color: #323338;
 }
+
+
+body.claro .estado-select{
+  color: #323338;
+}
+
+body.claro .responsable-select {
+    color: #323338;;
+}
+
+body.claro .estado-select:hover  {
+  background-color: rgba(103, 104, 121, 0.3);
+}
+ body.claro .responsable-select:hover {
+  background-color: rgba(103, 104, 121, 0.3);
+}
+
+body.claro .estado-select option {
+  color: #323338;
+  background-color: rgba(103, 104, 121, 0.3);
+}
+
+ body.claro .responsable-select option {
+  color: #323338;
+  background-color: rgba(103, 104, 121, 0.3);
+}
+
+body.claro .contaniner-tareas h1 {
+    color: #323338;
+}
+
+body.claro #buscadorTareas {
+    border: 1px solid #ccc;
+    color: #323338;
+}
+
+

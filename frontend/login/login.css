@@ -44,6 +44,11 @@
     font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
 }
 
+.container-form p{
+    font-size: 14px;
+    font-weight: 200;
+    font-family: Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+}
 
 .form-content {
     margin-top: 28px;

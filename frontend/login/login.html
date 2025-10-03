@@ -7,8 +7,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="./login.css">
-
-
 </head>
 <header>
     <div class="container-logo">
@@ -24,13 +22,18 @@
         const validateUser = async () => {
             const USER = await getProfile(false);
             if (USER && USER.user) {
-                window.location.href = "/frontend/panelTareas/panel.html";
+                const role = Number(USER.user.role_type);
+
+                if (role === 3) {
+                    window.location.href = "/frontend/panelTareas/panelTareasT2.html";
+                } else {
+                    window.location.href = "/frontend/panelTareas/panel.html";
+                }
             }
         }
+
         validateUser();
     </script>
-
-
 
     <section class="container container-login">
         <div class="form-text-container">
@@ -52,7 +55,6 @@
                                 <span class="error"></span>
                             </div>
                             <div class="d-grid gap-2 btn-form">
-                                <!-- <a href="#" target="_blank">¿Olvidaste tu contraseña?</a> -->
                                 <button type="submit" class="btn" id="btn-form">Iniciar sesión
                                     <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20"
                                         aria-hidden="true"
@@ -67,67 +69,11 @@
                         </div>
                     </form>
                 </div>
-
+                 <p>Aún no estas registrado?<a href="../registro/registro.html"> Registrate</a></p>
             </div>
         </div>
     </section>
-
-    <script>
-
-        const form = document.getElementById("form");
-
-
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-            if (!email || !password) {
-                alert("Por favor llena todos los campos");
-                return;
-            }
-
-            if (!emailRegex.test(email)) {
-                alert("Ingresa un correo válido");
-                return;
-            }
-
-            if (password.length < 8) {
-                alert("La contraseña debe tener al menos 8 caracteres");
-                return;
-            }
-
-            try {
-                const res = await fetch("http://localhost:3001/api/users/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include", // mantener sesión
-                    body: JSON.stringify({ email, password })
-                });
-
-                const data = await res.json();
-
-                if (res.ok) {
-                    alert("✅ Sesión iniciada correctamente");
-                    // Redirigir al panel
-                    window.location.href = "/frontend/panelTareas/panel.html";
-                } else {
-                    alert(data.message || "Error en las credenciales");
-                }
-            } catch (error) {
-                console.error("Error en login:", error);
-                alert("Error de conexión con el servidor");
-            }
-        });
-
-    </script>
-
+<script src="./login.js"></script>
 </body>
 
 </html>

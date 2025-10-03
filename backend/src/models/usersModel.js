@@ -47,7 +47,7 @@ User.init({
   timestamps: false
 });
 
-// Asociaciones
+
 User.belongsTo(Role, { foreignKey: 'role_type' });
 Role.hasMany(User, { foreignKey: 'role_type' });
 
