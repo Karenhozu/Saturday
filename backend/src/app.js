@@ -33,10 +33,6 @@ app.use(session({
   }
 }));
 
-app.use((req, res, next) => {
-  console.log('🧩 Session ID:', req.sessionID);
-  console.log('🧠 Session data:', req.session);
-});
 
 // Rutas
 app.use('/api/users', userRoutes);
