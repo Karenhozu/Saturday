@@ -6,7 +6,6 @@ const userRoutes = require('./src/routes/userRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
 const statusRoutes = require('./src/routes/statusRoutes');
 const cors = require("cors");
-const path = require('path');
 
 const app = express();
 
@@ -35,23 +34,6 @@ app.use(session({
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/status', statusRoutes);
-
-// Servir todos los archivos estáticos de frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-// Rutas principales del frontend
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/login/login.html'));
-});
-
-app.get('/registro', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/registro/registro.html'));
-});
-
-app.get('/panel', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/panel/panel.html'));
-});
-
 
 
 // Sincronizar modelos con la BD
