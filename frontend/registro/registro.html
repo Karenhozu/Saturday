@@ -23,7 +23,7 @@
         const validateUser = async () => {
             const USER = await getProfile(false);
             if (USER && USER.user) {
-                window.location.href = "/frontend/panelTareas/panel.html";
+                window.location.href = "/panelTareas/panel.html";
             }
         }
         validateUser();

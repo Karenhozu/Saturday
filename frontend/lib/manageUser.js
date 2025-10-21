@@ -6,7 +6,7 @@ async function logout(event) {
     });
     console.log(res);
     localStorage.removeItem("user");
-    window.location.href = "/frontend/login/login.html";
+    window.location.href = "/nd/login/login.html";
 }
 
 async function getProfile(redirectLogin = true) {
@@ -18,7 +18,7 @@ async function getProfile(redirectLogin = true) {
         const data = await res.json();
         return data;
     }   
-    if (redirectLogin) window.location.href = "/frontend/login/login.html";
+    if (redirectLogin) window.location.href = "/login/login.html";
     return null;
 }
 

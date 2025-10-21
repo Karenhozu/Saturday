@@ -37,10 +37,10 @@
 
                     if (role === 3) {
                         // Tablero T2
-                        window.location.href = "/frontend/panelTareas/panelTareasT2.html";
+                        window.location.href = "/panelTareas/panelTareasT2.html";
                     } else {
                         // Admin (1) y T1 (2) van a T1 por defecto
-                        window.location.href = "/frontend/panelTareas/panel.html";
+                        window.location.href = "/panelTareas/panel.html";
                     }
                 } else {
                     alert(data.message || "Error en las credenciales");

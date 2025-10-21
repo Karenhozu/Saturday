@@ -21,7 +21,7 @@ form.addEventListener("submit", async (e) => {
 
         if (res.ok) {
             alert(data.message);
-            window.location.href = "/frontend/login/login.html";
+            window.location.href = "/login/login.html";
         } else {
             alert(data.message || "Error al registrar usuario");
         }

@@ -27,7 +27,7 @@ async function cargarTareas() {
         const USER = await getProfile();
         if (!USER || !USER.user) {
             alert("No estás autenticado.");
-            window.location.replace("/frontend/login/login.html");
+            window.location.replace("/login/login.html");
             return;
         }
 
@@ -52,7 +52,7 @@ async function cargarTareas() {
 
         if (res.status === 401) {
             alert("Sesión expirada. Inicia sesión de nuevo.");
-            window.location.replace("/frontend/login/login.html");
+            window.location.replace("/login/login.html");
             return;
         }
         if (res.status === 403) {
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const profile = await getProfile();
         if (!profile || !profile.user) {
             alert("No estás autenticado.");
-            window.location.replace("/frontend/login/login.html");
+            window.location.replace("/login/login.html");
             return;
         }
 
@@ -203,13 +203,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         // validación de acceso directo por URL
         if (ROLE === 2 && !isT1Page) {
             alert("No tienes permisos para este tablero. Te dejamos en T1.");
-            window.location.replace("/frontend/panelTareas/panel.html");
+            window.location.replace("/panelTareas/panel.html");
             return;
         }
 
         if (ROLE === 3 && !isT2Page) {
             alert("No tienes permisos para este tablero. Te dejamos en T2.");
-            window.location.replace("/frontend/panelTareas/panelTareasT2.html");
+            window.location.replace("/panelTareas/panelTareasT2.html");
             return;
         }
 
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
         console.error("Error validando sesión/rol:", err);
-        window.location.replace("/frontend/login/login.html");
+        window.location.replace("/login/login.html");
     }
 });
 
