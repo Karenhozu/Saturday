@@ -4,7 +4,7 @@ let usuarios = [];
 //  Cargar estados desde backend
 async function cargarEstados() {
     try {
-        const res = await fetch("http://localhost:3001/api/status", { credentials: "include" });
+        const res = await fetch("https://saturday-wrzv.onrender.com/api/status", { credentials: "include" });
         estados = await res.json();
     } catch (error) {
         console.error(" Error cargando estados:", error);
@@ -14,7 +14,7 @@ async function cargarEstados() {
 //  Cargar usuarios desde backend
 async function cargarUsuarios() {
     try {
-        const res = await fetch("http://localhost:3001/api/users", { credentials: "include" });
+        const res = await fetch("https://saturday-wrzv.onrender.com/api/users", { credentials: "include" });
         usuarios = await res.json();
     } catch (error) {
         console.error(" Error cargando usuarios:", error);
@@ -45,7 +45,7 @@ async function cargarTareas() {
         //     roleParam = isT2Page ? 3 : 2;
         // }
 
-        const res = await fetch(`http://localhost:3001/api/tasks?id_rol=${roleParam}`, {
+        const res = await fetch(`https://saturday-wrzv.onrender.com/api/tasks?id_rol=${roleParam}`, {
             method: "GET",
             credentials: "include"
         });
@@ -130,7 +130,7 @@ async function cargarTareas() {
                 const idTarea = e.target.dataset.id;
                 const nuevoEstado = e.target.value;
                 try {
-                    await fetch(`http://localhost:3001/api/tasks/${idTarea}/status`, {
+                    await fetch(`https://saturday-wrzv.onrender.com/api/tasks/${idTarea}/status`, {
                         method: "PUT",
                         credentials: "include",
                         headers: { "Content-Type": "application/json" },
@@ -149,7 +149,7 @@ async function cargarTareas() {
                 const idTarea = e.target.dataset.id;
                 const nuevoResponsable = e.target.value || null;
                 try {
-                    await fetch(`http://localhost:3001/api/tasks/${idTarea}`, {
+                    await fetch(`https://saturday-wrzv.onrender.com/api/tasks/${idTarea}`, {
                         method: "PUT",
                         credentials: "include",
                         headers: { "Content-Type": "application/json" },

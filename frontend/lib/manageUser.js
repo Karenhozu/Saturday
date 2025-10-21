@@ -1,6 +1,6 @@
 async function logout(event) {
     event.preventDefault();
-   const res =  await fetch("http://localhost:3001/api/users/logout", {
+   const res =  await fetch("https://saturday-wrzv.onrender.com/api/users/logout", {
         method: "POST",
         credentials: "include"
     });
@@ -10,7 +10,7 @@ async function logout(event) {
 }
 
 async function getProfile(redirectLogin = true) {
-    const res = await fetch("http://localhost:3001/api/users/profile", {
+    const res = await fetch("https://saturday-wrzv.onrender.com/api/users/profile", {
         method: "GET",
         credentials: "include"
     });

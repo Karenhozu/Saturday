@@ -11,7 +11,7 @@ form.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value.trim();
 
     try {
-        const res = await fetch("http://localhost:3001/api/users/register", {
+        const res = await fetch("https://saturday-wrzv.onrender.com/api/users/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_user, name, last_name, role_type, email, password })
