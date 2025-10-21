@@ -6,7 +6,7 @@ async function logout(event) {
     });
     console.log(res);
     localStorage.removeItem("user");
-    window.location.href = "/nd/login/login.html";
+    window.location.href = "/login/login.html";
 }
 
 async function getProfile(redirectLogin = true) {
