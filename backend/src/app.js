@@ -19,17 +19,24 @@ app.use(cors({
   credentials: true
 }));
 
+app.set('trust proxy', 1);
 
 app.use(session({
   secret: "supersecreto",
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
     httpOnly: true,
     secure: true, // true si usas HTTPS
     sameSite: 'none'
   }
 }));
+
+app.use((req, res, next) => {
+  console.log('🧩 Session ID:', req.sessionID);
+  console.log('🧠 Session data:', req.session);
+});
 
 // Rutas
 app.use('/api/users', userRoutes);
