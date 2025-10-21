@@ -26,7 +26,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: false, // true si usas HTTPS
+    secure: true, // true si usas HTTPS
   }
 }));
 
