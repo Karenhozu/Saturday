@@ -42,5 +42,6 @@ sequelize.sync()
   .catch(err => console.error('Error al sincronizar modelos:', err));
 
 
-
 module.exports = app;
+
+// Iniciar el servidor
