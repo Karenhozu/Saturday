@@ -1,10 +1,10 @@
 const express = require('express');
 const session = require("express-session");
 const bodyParser = require('body-parser');
-const sequelize = require('./src/database');
-const userRoutes = require('./src/routes/userRoutes');
-const taskRoutes = require('./src/routes/taskRoutes');
-const statusRoutes = require('./src/routes/statusRoutes');
+const sequelize = require('./database');
+const userRoutes = require('./routes/userRoutes');
+const taskRoutes = require('./routes/taskRoutes');
+const statusRoutes = require('./routes/statusRoutes');
 const cors = require("cors");
 
 const app = express();
@@ -43,5 +43,3 @@ sequelize.sync()
 
 
 module.exports = app;
-
-// Iniciar el servidor
